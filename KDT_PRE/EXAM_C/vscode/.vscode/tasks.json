@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "gcc build",
+        "type": "shell",
+        "command": "gcc",
+        "args": [
+          "-g",
+          "-O0",
+          "-Wall",
+          "-Wextra",
+          "-std=c17",
+          "${workspaceFolder}/src/main.c",
+          "-o",
+          "${workspaceFolder}/build/app.exe"
+        ],
+        "options": {
+          "env": {
+            "PATH": "C:\\msys64\\ucrt64\\bin;${env:PATH}"
+          }
+        },
+        "group": { "kind": "build", "isDefault": true },
+        "problemMatcher": "$gcc"
+      }
+    ]
+  }  
