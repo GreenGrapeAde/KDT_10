@@ -20,7 +20,7 @@ FILE_NAME = './calc_history.txt'
 ## 결과반환: 없음
 ## ----------------------------------------------------
 def printMenu():
-    print(f'{"선택":-^10}')
+    print(f'{"선택":-^17}')
     print(f'{"1. 입  력":<12}')
     print(f'{"2. 덧  셈":<12}')
     print(f'{"3. 뺄  셈":<12}')
@@ -31,7 +31,7 @@ def printMenu():
     print(f'{"8. 기록 초기화":<12}')
     print(f'{"9. 마지막 결과값 사용":<12}')
     print(f'{"X. 종  료":<12}')
-    print(f'{"":-^12}')
+    print(f'{"":-^19}')
 
 ## ----------------------------------------------------
 ## 함수 기능: 연산에 사용될 데이터 2개 입력받기 기능
@@ -183,7 +183,8 @@ while True:
         else: print("올바른 두번째 값을 입력하세요!!")
     elif cmd == '6':
         printHistory()
-    ## Todo: 7. 기록 변경, 9. 마지막 결과값 사용
+    elif cmd == '7':
+        changeHistory()
     elif cmd == '8':
         clearHistory()
     elif cmd == '9':
