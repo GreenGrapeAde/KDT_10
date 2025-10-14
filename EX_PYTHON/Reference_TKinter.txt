@@ -1,0 +1,5 @@
+[geeksforgeeks]
+https://www.geeksforgeeks.org/python/python-gui-tkinter/
+
+[tkdocs]
+https://tkdocs.com/shipman/

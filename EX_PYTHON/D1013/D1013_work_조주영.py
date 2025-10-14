@@ -28,7 +28,7 @@ class Time:
     @classmethod
     def from_string(cls, time_string):
         hour, minute, second = map(int, time_string.split(":"))
-        return cls(hour, minute, second)
+        return cls(hour, minute, second) ## == Time(hour, minute, second) / cls를 통해 init 호출이 가능해진다.
 
     @staticmethod
     def is_time_valid(time_string):
