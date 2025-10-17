@@ -12,19 +12,38 @@
 """
 
 from tkinter import *
-from tkinter import messagebox     # 알림창을 띄우기 위해 추라고 import
+from tkinter import messagebox     # 알림창을 띄우기 위해 추가로 import
 
 from datetime import *             # 시간을 띄우기 위한 패키지
 from calendar import monthrange    
 
-
+import os                          # 파일 입출력을 위한 패키지
 ## ---------------------------------------------------------------------
 ## 전역 변수
 ## ---------------------------------------------------------------------
 subscriptions = []   # [{'name': str, 'date': str, 'price': str}, ...]
+DATA_FILE = "subscriptions.txt"
 
 ## ---------------------------------------------------------------------
-## 함수 정의
+## 파일 입출력 함수
+## ---------------------------------------------------------------------
+def load_data():
+    """저장된 정기결제 데이터를 파일에서 읽어오기"""
+    if not os.path.exists(DATA_FILE):
+        return  # 파일이 없으면 그냥 종료
+    with open(DATA_FILE, "r", encoding="utf-8") as f:
+        for line in f:
+            name, date, price = line.strip().split(",")
+            subscriptions.append({'name': name, 'date': date, 'price': price})
+
+def save_data():
+    """현재 정기결제 데이터를 파일에 저장"""
+    with open(DATA_FILE, "w", encoding="utf-8") as f:
+        for sub in subscriptions:
+            f.write(f"{sub['name']},{sub['date']},{sub['price']}\n")
+
+## ---------------------------------------------------------------------
+## UI 관련 함수 정의
 ## ---------------------------------------------------------------------
 def update_listbox():
     """리스트박스에 앱 이름 목록을 갱신"""
@@ -84,6 +103,7 @@ def add_subscription():
         subscriptions.sort(key=lambda sub: int(sub['date'])) ## 날짜 순으로 정렬, sub 말고 x처럼 임의의 값 주면 됨
         update_listbox()
         update_total()
+        save_data()
         add_win.destroy()          # 서브 윈도우 내림
 
 
@@ -115,6 +135,7 @@ def delete_subscription():
                 subscriptions.remove(sub)
                 update_listbox()
                 update_total()
+                save_data()
                 info_text.set("삭제 완료")
                 del_win.destroy()
                 return                                      # 정상적이라면 여기서 종료
@@ -141,7 +162,8 @@ def edit_subscription():
                 sub['price'] = entry_price.get().strip()
                 subscriptions.sort(key=lambda sub: int(sub['date']))  ## 날짜와 가격이 바뀌었으므로 날짜 오름차순으로 정렬
                 update_listbox()
-                update_total() 
+                update_total()
+                save_data() 
                 info_text.set("정보가 수정되었습니다.")
                 edit_win.destroy()
                 return
@@ -229,6 +251,14 @@ total_frame = Frame(bottom_frame)
 total_frame.pack(side='bottom', fill='both', expand=True, padx=20, pady=(100, 0))
 total_label = Label(total_frame, text=f"이번달 총 결제 금액: 0원", font=('Arial', 12, 'bold'))
 total_label.pack(anchor='w')
+
+## ---------------------------------------------------------------------
+## 실행 전: 파일에서 데이터 불러오기
+## ---------------------------------------------------------------------
+load_data()
+update_listbox()
+update_total()
+
 ## ---------------------------------------------------------------------
 ## 이벤트 루프
 ## ---------------------------------------------------------------------
