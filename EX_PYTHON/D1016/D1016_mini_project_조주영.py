@@ -8,9 +8,6 @@
 ## - 데이터는 임시 리스트로 관리
 ## =====================================================================
 
-"""Todo List
-"""
-
 from tkinter import *
 from tkinter import messagebox     # 알림창을 띄우기 위해 추가로 import
 
