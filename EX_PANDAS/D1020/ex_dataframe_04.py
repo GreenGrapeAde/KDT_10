@@ -23,7 +23,7 @@ def print_attr(df, df_name):
     print(f'\n---[{df_name} 속성 읽기]---')
     print(f'인덱스: {df.index}')
     print(f'컬럼즈: {df.columns}')
-    print(f'데이터:\n{df.values}, \n{type(df.values)}')
+    print(f'데이터:\n{df.values}, \n{type(df.values)}')  ## 실제 메모리에 저장된 데이터
     print(f'형  태: {df.shape}')         ## 1차원으로 원소 수 반환
     print(f'차  원: {df.ndim}차원')      ## 1차원
     print(f'타  입:\n{df.dtypes}')       ## 컬럼별 타입
